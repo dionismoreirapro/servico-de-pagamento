@@ -8,7 +8,7 @@ describe('ServicoDePagamento', () => {
     servico = new ServicoDePagamento();
   });
 
-  describe('#pagar', () => {
+  describe('pagar', () => {
     it('deve registrar um pagamento com as propriedades corretas', () => {
       servico.pagar('0987-7656-3475', 'Samar', 56.87);
       const pagamento = servico.consultarUltimoPagamento();
@@ -43,7 +43,7 @@ describe('ServicoDePagamento', () => {
     });
   });
 
-  describe('#consultarUltimoPagamento', () => {
+  describe('consultarUltimoPagamento', () => {
     it('deve retornar null quando não houver pagamentos', () => {
       assert.strictEqual(servico.consultarUltimoPagamento(), null);
     });
