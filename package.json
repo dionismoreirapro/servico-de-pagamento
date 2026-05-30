@@ -1,0 +1,12 @@
+{
+  "name": "servico-de-pagamento",
+  "version": "1.0.0",
+  "description": "Classe de serviço de pagamento com testes em Mocha e Node Assert",
+  "main": "src/ServicoDePagamento.js",
+  "scripts": {
+    "test": "mocha test/**/*.test.js"
+  },
+  "devDependencies": {
+    "mocha": "^10.0.0"
+  }
+}
