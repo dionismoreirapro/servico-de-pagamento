@@ -1,0 +1,51 @@
+name: CI - Testes Automatizados
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    # Toda segunda-feira às 08:00 UTC (05:00 horário de Brasília)
+    - cron: '0 8 * * 1'
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  testes:
+    name: Executar testes e gerar relatório
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar testes automatizados
+        run: npm run test:ci
+
+      - name: Publicar resultados dos testes no GitHub
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: reports/junit/test-results.xml
+          check_name: Resultado dos testes - ServicoDePagamento
+
+      - name: Armazenar relatório de testes como artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: relatorio-de-testes-${{ github.run_number }}
+          path: reports/
+          retention-days: 30

@@ -4,9 +4,13 @@
   "description": "Classe de serviço de pagamento com testes em Mocha e Node Assert",
   "main": "src/ServicoDePagamento.js",
   "scripts": {
-    "test": "mocha test/**/*.test.js"
+    "test": "mocha test/**/*.test.js",
+    "test:ci": "mkdir -p reports/junit reports/html && mocha test/**/*.test.js --reporter mocha-multi-reporters --reporter-options configFile=.mocharc.ci.json"
   },
   "devDependencies": {
-    "mocha": "^10.0.0"
+    "mocha": "^10.0.0",
+    "mocha-junit-reporter": "^2.2.1",
+    "mocha-multi-reporters": "^1.5.1",
+    "mochawesome": "^7.1.4"
   }
 }
